@@ -9,11 +9,6 @@ rm(list=ls(all=TRUE))
 require(deSolve)
 
 #
-# Set working directory
-#
-setwd(<YOUR DIRECTORY HERE>)
-
-#
 # This script replicates Fig. 10B and writes the results to a file
 #
 
@@ -57,8 +52,6 @@ modelFunc <- function(t, y, p)
   return(list(dydt))  
 }
 
-png(file = "fig10B.png",width=8,height=8, units='in',res=300)
-
 par(mar=c(5,7,2,2), las = 1, xpd = FALSE)
 output <- lsoda(c(thisParams$rho/thisParams$eta,0,thisParams$rho/thisParams$gamma,0,0,1,0), seq(from = 0, to = 36, length.out = 1000), modelFunc, thisParams)
 
@@ -75,5 +68,4 @@ legend("topright", lty = c(1, 2, 3, 4, 5), lwd=3,
        col = c("#B2DF8A","#A6CEE3","#33A02C","#1F78B4","#984EA3"), cex=1.2,
        legend = c(expression("Susceptible flush (S"[F]*")"), expression("Asymptomatic flush (A"[F]*")"),  expression("Susceptible mature (S"[M]*")"), expression("Asymptomatic mature (A"[M]*")"), expression("Symptomatic mature (V"[M]*")")))
 
-dev.off()
 
